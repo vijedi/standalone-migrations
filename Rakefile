@@ -17,6 +17,9 @@ namespace :db do
   desc "Migrate the database using the scripts in the migrate directory. Target specific version with VERSION=x. Turn off output with VERBOSE=false."
   task :migrate => :ar_init  do
     require 'migration_helpers/init'
+    require 'redhillonrails_core/init'
+    require 'foreign_key_migrations/init'
+
     ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
     ActiveRecord::Migrator.migrate(APP_BASE + "/migrations/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
     Rake::Task[ "db:schema:dump" ].execute
