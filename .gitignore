@@ -1,3 +1,2 @@
-schema.rb
 config/database.yml
-
+/schema.rb
